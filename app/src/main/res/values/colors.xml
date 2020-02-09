@@ -10,6 +10,8 @@
     <color name="colorComplementDark">#BE8916</color>
     <color name="colorComplementDarker">#976804</color>
 
+    <color name="colorAccent">#EEE</color>
+
     <color name="colorSurface">#FEFEFE</color>
     <color name="colorOnSurface">#303030</color>
 

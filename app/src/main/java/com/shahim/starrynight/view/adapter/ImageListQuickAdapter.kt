@@ -1,6 +1,7 @@
 package com.shahim.starrynight.view.adapter
 
 import androidx.recyclerview.widget.DiffUtil
+import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.shahim.starrynight.R
@@ -10,7 +11,16 @@ import com.shahim.starrynight.model.ImageObject
 class ImageListQuickAdapter(data: ArrayList<ImageObject>) : BaseQuickAdapter<ImageObject, BaseViewHolder>(R.layout.list_image_item, data) {
 
     override fun convert( viewHolder: BaseViewHolder, item: ImageObject?) {
-
+        item?.let {
+            Glide
+                .with(context)
+                .load(it.url)
+//                .centerCrop()
+                .placeholder(R.drawable.bg_placeholder)
+                .into(viewHolder.getView(R.id.list_image))
+            viewHolder.setText(R.id.list_title,it.title)
+                .setText(R.id.list_author,it.copyright)
+        }
     }
    fun updateItems(newItems: List<ImageObject>) {
         val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {

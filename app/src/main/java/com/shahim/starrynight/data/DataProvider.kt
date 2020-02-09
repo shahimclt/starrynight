@@ -13,10 +13,10 @@ import java.io.InputStream
 
 object DataProvider {
 
-    private var cachedImagesObservable: Single<List<ImageObject>>? = null
-    fun getImageObservable(c: Context): Single<List<ImageObject>> {
+    private var cachedImagesObservable: Single<ArrayList<ImageObject>>? = null
+    fun getImageObservable(c: Context): Single<ArrayList<ImageObject>> {
         if(cachedImagesObservable == null) {
-            val imagesObservable: Single<List<ImageObject>> =
+            val imagesObservable: Single<ArrayList<ImageObject>> =
                 Single.create { emitter ->
                     fun readTextFile(inputStream: InputStream): String {
                         val outputStream = ByteArrayOutputStream()
@@ -39,8 +39,8 @@ object DataProvider {
                         val jsonString: String = readTextFile(xmlFileInputStream)
 
                         val gson = Gson()
-                        val type = object : TypeToken<List<ImageObject>>() {}.type
-                        val images: List<ImageObject> = gson.fromJson(jsonString,type)
+                        val type = object : TypeToken<ArrayList<ImageObject>>() {}.type
+                        val images: ArrayList<ImageObject> = gson.fromJson(jsonString,type)
                         emitter.onSuccess(images)
 
                     } catch (e: Exception) {

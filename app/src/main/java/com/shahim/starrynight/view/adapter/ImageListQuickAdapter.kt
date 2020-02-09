@@ -7,7 +7,7 @@ import com.shahim.starrynight.R
 import com.shahim.starrynight.model.ImageObject
 
 
-class ImageListQuickAdapter(data: ArrayList<ImageObject>) : BaseQuickAdapter<ImageObject, BaseViewHolder>(R.layout.list_image_item, data) {
+class ImageListQuickAdapter(data: List<ImageObject>) : BaseQuickAdapter<ImageObject, BaseViewHolder>(R.layout.list_image_item, data) {
 
     override fun convert( viewHolder: BaseViewHolder, item: ImageObject?) {
 

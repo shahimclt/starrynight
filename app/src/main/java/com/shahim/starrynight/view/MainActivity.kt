@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .add(R.id.container,
-                MainFragment(imageList)
+                MainFragment.newInstance(imageList)
             )
             .commit()
     }

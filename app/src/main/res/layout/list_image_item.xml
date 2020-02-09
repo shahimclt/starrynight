@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:clipChildren="true"
     app:cardCornerRadius="6dp"
-    android:layout_marginBottom="@dimen/element_spacing">
+    android:layout_margin="@dimen/line_spacing">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,44 +20,10 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@drawable/bg_placeholder"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/list_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/element_spacing"
-            android:ellipsize="end"
-            android:fontFamily="@font/roboto_medium"
-            android:maxLines="1"
-            android:textAlignment="center"
-            android:textColor="@color/textColorPrimary"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/list_image"
-            tools:text="Starburst Galaxy M94 from Hubble" />
-
-        <TextView
-            android:id="@+id/list_author"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/element_spacing"
-            android:layout_marginEnd="@dimen/element_spacing"
-            android:layout_marginBottom="@dimen/element_spacing"
-            android:textAlignment="center"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:fontFamily="@font/roboto_thin"
-            android:textColor="@color/textColorSecondary"
-            android:textSize="12sp"
-            app:layout_constraintTop_toBottomOf="@id/list_title"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="ESA/HubbleNASA" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

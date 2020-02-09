@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private var imageList: List<ImageObject> = ArrayList()
+    private var imageList: ArrayList<ImageObject> = ArrayList()
 
     private lateinit var observer: Disposable
 

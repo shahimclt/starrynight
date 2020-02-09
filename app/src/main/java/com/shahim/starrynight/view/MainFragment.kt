@@ -18,14 +18,14 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class MainFragment : Fragment() {
 
     companion object {
-        fun newInstance(_imageList: List<ImageObject>): MainFragment {
+        fun newInstance(_imageList: ArrayList<ImageObject>): MainFragment {
             val frag = MainFragment()
             frag.imageList = _imageList
             return frag
         }
     }
 
-    private lateinit var imageList: List<ImageObject>
+    private lateinit var imageList: ArrayList<ImageObject>
 
     private lateinit var mAdapter: ImageListQuickAdapter
 
@@ -43,12 +43,13 @@ class MainFragment : Fragment() {
     }
 
     private fun init() {
-
+        initAdapter()
     }
 
 
     private fun initAdapter() {
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = layoutManager
         recyclerView.setHasFixedSize(true)
         mAdapter = ImageListQuickAdapter(imageList)
         recyclerView.adapter = mAdapter
@@ -56,7 +57,7 @@ class MainFragment : Fragment() {
         if(imageList.isNullOrEmpty()) mAdapter.setEmptyView(R.layout.list_empty_view)
 
         mAdapter.setOnItemClickListener { adapter, view, position ->
-            
+
         }
     }
 }

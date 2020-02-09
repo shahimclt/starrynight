@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.shahim.starrynight.R
 import com.shahim.starrynight.data.DataProvider
 import com.shahim.starrynight.model.ImageObject
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy

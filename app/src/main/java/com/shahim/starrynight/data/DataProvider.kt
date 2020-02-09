@@ -1,6 +1,7 @@
 package com.shahim.starrynight.data
 
 import android.content.Context
+import android.media.Image
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.shahim.starrynight.R
@@ -41,6 +42,7 @@ object DataProvider {
                         val gson = Gson()
                         val type = object : TypeToken<ArrayList<ImageObject>>() {}.type
                         val images: ArrayList<ImageObject> = gson.fromJson(jsonString,type)
+                        images.sortWith(Comparator{a: ImageObject,b: ImageObject -> b.date.compareTo(a.date)})
                         emitter.onSuccess(images)
 
                     } catch (e: Exception) {

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.shahim.starrynight.R
 import com.shahim.starrynight.model.ImageObject
 import com.shahim.starrynight.view.adapter.ImageListQuickAdapter
@@ -48,8 +49,9 @@ class MainFragment : Fragment() {
 
 
     private fun initAdapter() {
-        val layoutManager = LinearLayoutManager(context)
+        val layoutManager = StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
         recyclerView.layoutManager = layoutManager
+        recyclerView.itemAnimator = null
         recyclerView.setHasFixedSize(true)
         mAdapter = ImageListQuickAdapter(imageList)
         recyclerView.adapter = mAdapter

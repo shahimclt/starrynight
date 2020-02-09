@@ -18,8 +18,6 @@ class ImageListQuickAdapter(data: ArrayList<ImageObject>) : BaseQuickAdapter<Ima
 //                .centerCrop()
                 .placeholder(R.drawable.bg_placeholder)
                 .into(viewHolder.getView(R.id.list_image))
-            viewHolder.setText(R.id.list_title,it.title)
-                .setText(R.id.list_author,it.copyright)
         }
     }
    fun updateItems(newItems: List<ImageObject>) {

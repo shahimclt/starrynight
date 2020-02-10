@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.transition.TransitionInflater
 import com.shahim.starrynight.R
 import com.shahim.starrynight.model.ImageObject
 import com.shahim.starrynight.view.adapter.ImagePagerAdapter
@@ -25,6 +26,13 @@ class ImageViewPagerFragment : Fragment() {
     private lateinit var images: ArrayList<ImageObject>
 
     private var initialPosition: Int = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        postponeEnterTransition()
+        sharedElementEnterTransition = TransitionInflater.from(context)
+            .inflateTransition(android.R.transition.move)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

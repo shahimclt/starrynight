@@ -19,7 +19,7 @@ class MainFragment : Fragment() {
     lateinit var galleryItemClickListener: GalleryItemClickListener
 
     interface GalleryItemClickListener {
-        fun onGalleryItemClicked( position: Int)
+        fun onGalleryItemClicked( position: Int, imageView: ImageView)
     }
 
     companion object {
@@ -62,8 +62,8 @@ class MainFragment : Fragment() {
 
         if(imageList.isNullOrEmpty()) mAdapter.setEmptyView(R.layout.list_empty_view)
 
-        mAdapter.setOnItemClickListener { adapter, view, position ->
-            galleryItemClickListener?.onGalleryItemClicked(position)
+        mAdapter.setOnItemClickListener { _, view, position ->
+            galleryItemClickListener?.onGalleryItemClicked(position,view.findViewById(R.id.list_image))
         }
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import com.shahim.starrynight.R
 import com.shahim.starrynight.data.DataProvider
@@ -69,9 +70,11 @@ class MainActivity : AppCompatActivity(), MainFragment.GalleryItemClickListener 
         }
     }
 
-    override fun onGalleryItemClicked(position: Int) {
+    override fun onGalleryItemClicked(position: Int, imageView: ImageView) {
+        val transitionName = ViewCompat.getTransitionName(imageView) ?:""
         supportFragmentManager
             .beginTransaction()
+            .addSharedElement(imageView,transitionName)
             .replace(R.id.container,
                 ImageViewPagerFragment.newInstance(imageList,position)
             )

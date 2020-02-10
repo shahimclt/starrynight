@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity(), MainFragment.GalleryItemClickListener 
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.container,
-                ImageDetailFragment.newInstance(imageList[position])
+                ImageViewPagerFragment.newInstance(imageList,position)
             )
             .addToBackStack(null)
             .commit()

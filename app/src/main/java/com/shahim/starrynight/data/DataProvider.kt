@@ -24,7 +24,7 @@ object DataProvider {
      * @param c context
      * @return RxJava Single observable which returns ArrayList<ImageObject>
      */
-    fun getImageObservable(c: Context): Single<ArrayList<ImageObject>> {
+    fun fetchImages(c: Context): Single<ArrayList<ImageObject>> {
         if(cachedImagesObservable == null) {
             val imagesObservable: Single<ArrayList<ImageObject>> =
                 Single.create { emitter ->

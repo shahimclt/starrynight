@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), MainFragment.GalleryItemClickListener 
     private lateinit var observer: Disposable
 
     private fun loadData() {
-        observer = DataProvider.getImageObservable(this)
+        observer = DataProvider.fetchImages(this)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

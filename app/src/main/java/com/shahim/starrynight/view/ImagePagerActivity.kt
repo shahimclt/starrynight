@@ -62,7 +62,7 @@ class ImagePagerActivity : AppCompatActivity(), ImageDetailFragment.FragmentLoad
     }
 
     private fun loadData() {
-        observer = DataProvider.getImageObservable(this)
+        observer = DataProvider.fetchImages(this)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(

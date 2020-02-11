@@ -78,6 +78,9 @@ class ImageDetailFragment : Fragment() {
 
     }
 
+    /**
+     * Load data into view
+     */
     private fun loadData() {
         detail_image.transitionName = image.title.replace("\\s".toRegex(), "")
         Picasso.with(context)
@@ -145,7 +148,11 @@ class ImageDetailFragment : Fragment() {
     }
 
 
-
+    /**
+     * Check write access permission
+     *
+     * @param onGrant Callback when permission is granted
+     */
     private fun checkSavePermission(onGrant : () -> Unit) {
 
         val baseLis: PermissionListener = object : PermissionListener {

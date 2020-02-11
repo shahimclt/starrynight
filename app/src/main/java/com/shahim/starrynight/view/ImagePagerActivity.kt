@@ -62,7 +62,7 @@ class ImagePagerActivity : AppCompatActivity(), ImageDetailFragment.FragmentLoad
     }
 
     private fun loadData() {
-        observer = DataProvider.getImageObservable(this)
+        observer = DataProvider.fetchImages(this)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
@@ -76,6 +76,10 @@ class ImagePagerActivity : AppCompatActivity(), ImageDetailFragment.FragmentLoad
             )
     }
 
+    /**
+     * Initalizes the Viewpager to show an image at the selected index
+     *
+     */
     private fun showImage() {
         val imagePagerAdapter = ImagePagerAdapter(this,imageList)
         view_pager.adapter = imagePagerAdapter
@@ -86,6 +90,8 @@ class ImagePagerActivity : AppCompatActivity(), ImageDetailFragment.FragmentLoad
         super.onDestroy()
         observer.dispose()
     }
+
+    // Methods for shared element transitions
 
     override fun onAttachFragment(fragment: Fragment) {
         if(fragment is ImageDetailFragment) {

@@ -1,5 +1,6 @@
 package com.shahim.starrynight.view
 
+import android.app.ActivityOptions
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
@@ -72,13 +73,8 @@ class MainActivity : AppCompatActivity(), MainFragment.GalleryItemClickListener 
 
     override fun onGalleryItemClicked(position: Int, imageView: ImageView) {
         val transitionName = ViewCompat.getTransitionName(imageView) ?:""
-        supportFragmentManager
-            .beginTransaction()
-            .addSharedElement(imageView,transitionName)
-            .replace(R.id.container,
-                ImageViewPagerFragment.newInstance(imageList,position)
-            )
-            .addToBackStack(null)
-            .commit()
+        val intent = ImagePagerActivity.craftIntent(this,position)
+        val options = ActivityOptions.makeSceneTransitionAnimation(this,imageView,transitionName)
+        startActivity(intent,options.toBundle())
     }
 }

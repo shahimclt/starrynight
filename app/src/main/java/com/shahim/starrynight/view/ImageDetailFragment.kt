@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.transition.TransitionInflater
 import com.shahim.starrynight.R
@@ -21,6 +22,12 @@ class ImageDetailFragment : Fragment() {
             frag.image = image
             return frag
         }
+    }
+
+    lateinit var fragmentLoadedListener: FragmentLoadedListener
+
+    interface FragmentLoadedListener {
+        fun onFragmentLoaded()
     }
 
     private lateinit var image: ImageObject
@@ -53,10 +60,12 @@ class ImageDetailFragment : Fragment() {
             .into(detail_image, object : Callback {
                 override fun onSuccess() {
                     startPostponedEnterTransition()
+                    fragmentLoadedListener?.onFragmentLoaded()
                 }
 
                 override fun onError() {
                     startPostponedEnterTransition()
+                    fragmentLoadedListener?.onFragmentLoaded() 
                 }
             })
     }

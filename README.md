@@ -20,6 +20,7 @@ Starry Night is a demo gallery app which allows you to browse and download a cur
 ## Some random thoughts
 
 - This project was coded in Kotlin, which I'm only recently learning. 🤞
+- The activity transitions are still a little glitchy. `//TODO` for later.
 
 ## Usage
 

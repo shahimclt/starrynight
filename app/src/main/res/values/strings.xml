@@ -3,6 +3,17 @@
 
     <string name="empty_view_title">Nothing to show here</string>
 
+    <string name="permission_rat_storage_title">Allow Pixman to access your storage?</string>
+
+    <string name="permission_rat_storage_message_import">Storage permission is required for Pixman to be able to import an image</string>
+    <string name="permission_rat_storage_denied_import">Uh oh! We cannot import an image without your permission</string>
+
+    <string name="permission_rat_storage_message_export">Storage permission is required for Pixman to be able to save the image</string>
+    <string name="permission_rat_storage_denied_export">Uh oh! We cannot save the image without your permission</string>
+
+    <string name="dialog_button_cancel">Cancel</string>
+    <string name="dialog_button_ok">OK</string>
+
     <string name="editor_save_success">Yay! Image saved to gallery</string>
     <string name="editor_save_error">uh oh! We could not save the image</string>
     <string name="editor_save_view_prompt">View</string>

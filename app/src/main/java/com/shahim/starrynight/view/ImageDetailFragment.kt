@@ -12,6 +12,7 @@ import com.shahim.starrynight.model.ImageObject
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_image_detail.*
+import org.threeten.bp.format.DateTimeFormatter
 
 
 class ImageDetailFragment : Fragment() {
@@ -68,5 +69,10 @@ class ImageDetailFragment : Fragment() {
                     fragmentLoadedListener?.onFragmentLoaded() 
                 }
             })
+
+        detail_title.text = image.title
+        detail_copyright.text = image.copyright
+        detail_desc.text = image.explanation
+        detail_date.text = image.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
     }
 }

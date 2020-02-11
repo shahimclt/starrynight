@@ -1,12 +1,10 @@
 package com.shahim.starrynight.view
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -17,6 +15,12 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 
 class MainFragment : Fragment() {
+
+    lateinit var galleryItemClickListener: GalleryItemClickListener
+
+    interface GalleryItemClickListener {
+        fun onGalleryItemClicked( position: Int, imageView: ImageView)
+    }
 
     companion object {
         fun newInstance(_imageList: ArrayList<ImageObject>): MainFragment {
@@ -58,8 +62,8 @@ class MainFragment : Fragment() {
 
         if(imageList.isNullOrEmpty()) mAdapter.setEmptyView(R.layout.list_empty_view)
 
-        mAdapter.setOnItemClickListener { adapter, view, position ->
-
+        mAdapter.setOnItemClickListener { _, view, position ->
+            galleryItemClickListener?.onGalleryItemClicked(position,view.findViewById(R.id.list_image))
         }
     }
 }

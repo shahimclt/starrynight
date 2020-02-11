@@ -1,5 +1,6 @@
 package com.shahim.starrynight.view
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.shahim.starrynight.R
 import com.shahim.starrynight.data.DataProvider
 import com.shahim.starrynight.model.ImageObject
@@ -27,6 +28,15 @@ class ImagePagerActivity : AppCompatActivity(), ImageDetailFragment.FragmentLoad
             val intent = Intent(c,ImagePagerActivity::class.java)
             intent.putExtra(KEY_POSITION,_initialPos)
             return intent
+        }
+
+        fun getPosition(resultCode: Int, data: Intent?): Int {
+            if(resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    return data.getIntExtra(KEY_POSITION,RecyclerView.NO_POSITION)
+                }
+            }
+            return RecyclerView.NO_POSITION
         }
     }
 
@@ -85,5 +95,17 @@ class ImagePagerActivity : AppCompatActivity(), ImageDetailFragment.FragmentLoad
 
     override fun onFragmentLoaded() {
         ActivityCompat.startPostponedEnterTransition(this)
+    }
+
+    override fun finishAfterTransition() {
+        setResult()
+        super.finishAfterTransition()
+    }
+
+    private fun setResult() {
+        val position: Int = view_pager.currentItem
+        val data = Intent()
+        data.putExtra(KEY_POSITION, position)
+        setResult(Activity.RESULT_OK, data)
     }
 }

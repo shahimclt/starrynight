@@ -48,8 +48,8 @@ class ImageViewPagerFragment : Fragment() {
     }
 
     private fun init() {
-        val imagePagerAdapter = ImagePagerAdapter(childFragmentManager,images)
+        val imagePagerAdapter = ImagePagerAdapter(this,images)
         view_pager.adapter = imagePagerAdapter
-        view_pager.currentItem = initialPosition
+        view_pager.setCurrentItem(initialPosition,false)
     }
 }

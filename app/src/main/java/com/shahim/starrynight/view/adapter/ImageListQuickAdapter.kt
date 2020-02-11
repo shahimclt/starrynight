@@ -17,8 +17,6 @@ class ImageListQuickAdapter(data: ArrayList<ImageObject>) : BaseQuickAdapter<Ima
             Glide
                 .with(context)
                 .load(it.url)
-                .transition(DrawableTransitionOptions.withCrossFade())
-//                .centerCrop()
                 .placeholder(R.drawable.bg_placeholder)
                 .into(viewHolder.getView(R.id.list_image))
 

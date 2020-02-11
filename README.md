@@ -23,7 +23,7 @@ Starry Night is a demo gallery app which allows you to browse and download a cur
 
 ## Usage
 
-Feel free to clone the project and build it yourself. Or ifyouare feeling lazy, grab the apk from [releases](https://github.com/shahimclt/starrynight/releases) and get going.
+Feel free to clone the project and build it yourself. Or if you're feeling lazy, grab the apk from [releases](https://github.com/shahimclt/starrynight/releases) and get going.
 
 ## Other Projects
 

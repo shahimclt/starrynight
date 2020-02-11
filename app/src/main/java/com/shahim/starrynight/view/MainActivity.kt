@@ -1,11 +1,14 @@
 package com.shahim.starrynight.view
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.shahim.starrynight.R
 import com.shahim.starrynight.data.DataProvider
 import com.shahim.starrynight.model.ImageObject
@@ -14,6 +17,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_main.*
 
 class MainActivity : AppCompatActivity(), MainFragment.GalleryItemClickListener {
 
@@ -72,13 +76,15 @@ class MainActivity : AppCompatActivity(), MainFragment.GalleryItemClickListener 
 
     override fun onGalleryItemClicked(position: Int, imageView: ImageView) {
         val transitionName = ViewCompat.getTransitionName(imageView) ?:""
-        supportFragmentManager
-            .beginTransaction()
-            .addSharedElement(imageView,transitionName)
-            .replace(R.id.container,
-                ImageViewPagerFragment.newInstance(imageList,position)
-            )
-            .addToBackStack(null)
-            .commit()
+        val intent = ImagePagerActivity.craftIntent(this,position)
+        val options = ActivityOptions.makeSceneTransitionAnimation(this,imageView,transitionName)
+        startActivity(intent,options.toBundle())
+    }
+
+    override fun onActivityReenter(resultCode: Int, data: Intent?) {
+        val position: Int = ImagePagerActivity.getPosition(resultCode, data);
+        if (position != RecyclerView.NO_POSITION) {
+            recyclerView.scrollToPosition(position)
+        }
     }
 }

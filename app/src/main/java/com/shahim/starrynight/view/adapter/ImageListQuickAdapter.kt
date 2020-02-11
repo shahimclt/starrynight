@@ -1,24 +1,23 @@
 package com.shahim.starrynight.view.adapter
 
+import android.widget.ImageView
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DiffUtil
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.shahim.starrynight.R
 import com.shahim.starrynight.model.ImageObject
+import com.squareup.picasso.Picasso
 
 
 class ImageListQuickAdapter(data: ArrayList<ImageObject>) : BaseQuickAdapter<ImageObject, BaseViewHolder>(R.layout.list_image_item, data) {
 
     override fun convert( viewHolder: BaseViewHolder, item: ImageObject?) {
         item?.let {
-            Glide
-                .with(context)
+            Picasso.with(context)
                 .load(it.url)
                 .placeholder(R.drawable.bg_placeholder)
-                .into(viewHolder.getView(R.id.list_image))
+                .into(viewHolder.getView(R.id.list_image) as ImageView)
 
             ViewCompat.setTransitionName(viewHolder.getView(R.id.list_image),it.title.replace("\\s".toRegex(), ""))
         }

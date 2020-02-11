@@ -1,19 +1,15 @@
 package com.shahim.starrynight.view
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.transition.TransitionInflater
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.shahim.starrynight.R
 import com.shahim.starrynight.model.ImageObject
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_image_detail.*
 
 
@@ -51,43 +47,17 @@ class ImageDetailFragment : Fragment() {
     }
 
     private fun init() {
-             Glide.with(activity!!)
-//                 .asBitmap()
+        Picasso.with(context)
             .load(image.url)
             .placeholder(R.drawable.bg_placeholder)
-                 .listener(object: RequestListener<Drawable> {
-                     override fun onResourceReady(
-                         resource: Drawable?,
-                         model: Any?,
-                         target: Target<Drawable>?,
-                         dataSource: DataSource?,
-                         isFirstResource: Boolean
-                     ): Boolean {
-                         startPostponedEnterTransition()
-                         return false
-                     }
+            .into(detail_image, object : Callback {
+                override fun onSuccess() {
+                    startPostponedEnterTransition()
+                }
 
-                     override fun onLoadFailed(
-                         e: GlideException?,
-                         model: Any?,
-                         target: Target<Drawable>?,
-                         isFirstResource: Boolean
-                     ): Boolean {
-                         return false
-                     }
-                 })
-                 .into(detail_image)
-//            .into(object : CustomTarget<Bitmap>(){
-//                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-//                    startPostponedEnterTransition()
-//                    detail_image.setImageBitmap(resource)
-//                }
-//                override fun onLoadCleared(placeholder: Drawable?) {
-//                    // this is called when imageView is cleared on lifecycle call or for
-//                    // some other reason.
-//                    // if you are referencing the bitmap somewhere else too other than this imageView
-//                    // clear it here as you can no longer have the bitmap
-//                }
-//            })
+                override fun onError() {
+                    startPostponedEnterTransition()
+                }
+            })
     }
 }

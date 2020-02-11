@@ -1,16 +1,21 @@
 package com.shahim.starrynight.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.transition.TransitionInflater
+import com.google.android.material.snackbar.Snackbar
 import com.shahim.starrynight.R
+import com.shahim.starrynight.data.ImageDownloader
 import com.shahim.starrynight.model.ImageObject
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_image_detail.*
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -74,5 +79,34 @@ class ImageDetailFragment : Fragment() {
         detail_copyright.text = image.copyright
         detail_desc.text = image.explanation
         detail_date.text = image.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
+
+        detail_save.setOnClickListener {view ->
+           view.isEnabled = false
+            progressBar.visibility = View.VISIBLE
+            ImageDownloader.download(requireContext(),image)
+                .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {uri ->
+                    Snackbar.make(container, R.string.editor_save_success, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.editor_save_view_prompt) {
+                            val intent = Intent()
+                            intent.action = Intent.ACTION_VIEW
+                            intent.setDataAndType(uri,"image/jpeg")
+                            intent.type = "image/jpeg"
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                            startActivity(intent)
+                        }
+                        .show()
+                    view.isEnabled = true
+                    progressBar.visibility = View.GONE
+                },
+                onError = {
+                    Snackbar.make(container, R.string.editor_save_success, Snackbar.LENGTH_LONG).show()
+                    view.isEnabled = true
+                    progressBar.visibility = View.GONE
+                }
+            )
+        }
     }
 }

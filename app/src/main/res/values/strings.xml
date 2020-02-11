@@ -2,4 +2,8 @@
     <string name="app_name">Starry Night</string>
 
     <string name="empty_view_title">Nothing to show here</string>
+
+    <string name="editor_save_success">Yay! Image saved to gallery</string>
+    <string name="editor_save_error">uh oh! We could not save the image</string>
+    <string name="editor_save_view_prompt">View</string>
 </resources>

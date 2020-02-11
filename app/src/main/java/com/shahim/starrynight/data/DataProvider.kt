@@ -11,14 +11,30 @@ import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
 
-
+/**
+ * Provides Utility methods to fetch data
+ */
 object DataProvider {
 
     private var cachedImagesObservable: Single<ArrayList<ImageObject>>? = null
+
+    /**
+     * Async fetch the data from the source. Subscribe to the observable to get the actual results
+     *
+     * @param c context
+     * @return RxJava Single observable which returns ArrayList<ImageObject>
+     */
     fun getImageObservable(c: Context): Single<ArrayList<ImageObject>> {
         if(cachedImagesObservable == null) {
             val imagesObservable: Single<ArrayList<ImageObject>> =
                 Single.create { emitter ->
+
+                    /**
+                     * Read the contents of an InputStream into a string
+                     *
+                     * @param inputStream Inputstream to read
+                     * @return String with the read data
+                     */
                     fun readTextFile(inputStream: InputStream): String {
                         val outputStream = ByteArrayOutputStream()
                         val buf = ByteArray(1024)
@@ -35,13 +51,15 @@ object DataProvider {
                         return outputStream.toString()
                     }
                     try {
-                        val xmlFileInputStream: InputStream = c.getResources().openRawResource(R.raw.data)
+                        val xmlFileInputStream: InputStream = c.resources.openRawResource(R.raw.data)
 
                         val jsonString: String = readTextFile(xmlFileInputStream)
 
                         val gson = Gson()
                         val type = object : TypeToken<ArrayList<ImageObject>>() {}.type
                         val images: ArrayList<ImageObject> = gson.fromJson(jsonString,type)
+
+                        /* Sort by date: Descending */
                         images.sortWith(Comparator{a: ImageObject,b: ImageObject -> b.date.compareTo(a.date)})
                         emitter.onSuccess(images)
 

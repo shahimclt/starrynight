@@ -11,7 +11,19 @@ import io.reactivex.Single
 import java.io.File
 import java.io.FileOutputStream
 
+/**
+ * Utility class to save an image to gallery
+ */
 object ImageDownloader {
+
+    /**
+     * Saves the image to gallery. This methods tries to access the ImageObject.hdurl first. If that is not set, it falls back to ImageObject.url
+     * The image is saved to public gallery
+     *
+     * @param c context
+     * @param image ImageObject instance
+     * @return RxKotlin observable which returns a reference to the saved file on success.
+     */
     fun download(c: Context, image: ImageObject): Single<File> {
         return Single.create { emitter ->
             fun saveImageToGallery(bitmap: Bitmap) {

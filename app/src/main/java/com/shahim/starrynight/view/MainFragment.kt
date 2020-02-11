@@ -19,6 +19,12 @@ class MainFragment : Fragment() {
     lateinit var galleryItemClickListener: GalleryItemClickListener
 
     interface GalleryItemClickListener {
+        /**
+         * Interface method to notify activity on item click on the image grid
+         *
+         * @param position position of the selected image
+         * @param imageView view that was clicked
+         */
         fun onGalleryItemClicked( position: Int, imageView: ImageView)
     }
 

@@ -74,6 +74,12 @@ class MainActivity : AppCompatActivity(), MainFragment.GalleryItemClickListener 
         }
     }
 
+    /**
+     * Interface method to notify activity on item click on the image grid
+     *
+     * @param position position of the selected image
+     * @param imageView view that was clicked
+     */
     override fun onGalleryItemClicked(position: Int, imageView: ImageView) {
         val transitionName = ViewCompat.getTransitionName(imageView) ?:""
         val intent = ImagePagerActivity.craftIntent(this,position)
